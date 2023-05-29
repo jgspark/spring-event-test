@@ -1,12 +1,14 @@
-package com.example.springeventtest.domain;
+package com.example.springeventtest.domain.order;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.time.LocalDateTime;
+
 @Getter
+@Entity(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
@@ -16,4 +18,16 @@ public class Order {
 
     @Column(nullable = false)
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Column(name = "order_date")
+    private LocalDateTime orderDate;
+
+    public enum Status {
+        ORDERED,
+        PAYED,
+        DELIVERED
+    }
 }
